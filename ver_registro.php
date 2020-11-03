@@ -83,8 +83,11 @@ if ($eliminar) {
 
                 <!-- Nombre y Fecha de Registro -->
                 <div class="row">
-                    <div class="ml-2 row align-items-center col-lg-9">
+                    <div class="ml-2 row align-items-center col-lg-10">
                         <h2><?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></h2>
+                    </div>
+                    <div class="ml-2 row align-items-center col-lg-2">
+                    <a href='#' title="Eliminar permanentemente" class="btn btn-danger" onclick="preguntar(<?php echo $persona['id'] ?>)">Eliminar</a>
                     </div>
                 </div>
                 <!-- Linea horizontal -->
@@ -142,8 +145,7 @@ if ($eliminar) {
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/eliminar.js" type="text/javascript"></script>
+    <script src="js/eliminar.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 
 </body>

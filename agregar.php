@@ -22,9 +22,7 @@ switch ($accion) {
         // Creando la sentencia SQL para insertar los valores en la BD
         // Utilizo pdo para preparar la sentencia
         $sentencia = $pdo->prepare("INSERT INTO persona(identidad, nombres, apellidos, direccion, telefono, correo, entregado)
-         values (:identidad, :nombres, :apellidos, :direccion, :telefono, :correo, 0)");
-
-        $fechaActual = date('d-m-Y');
+         values (:identidad, :nombres, :apellidos, :direccion, :telefono, :correo, 0)");        
         // bindParam será para asignar los valores referenciados anteriormente
         $sentencia->bindParam(':identidad', $txtIdentidad);
         $sentencia->bindParam(':nombres', $txtNombres);
