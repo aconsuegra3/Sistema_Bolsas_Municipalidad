@@ -161,8 +161,8 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             if ($persona['entregado']) { ?>
                                 <tr>
                                     <td class="text-center align-middle"><?php echo $c; ?></td>
-                                    <td class="text-center align-middle"> <a class="text-decoration-none text-dark" title="Ver información" href="ver.php?id=<?php echo $persona['id']; ?>"><?php echo $persona['identidad']; ?></td>
-                                    <td class="text-center align-middle"> <a class="text-decoration-none text-dark" title="Ver información" href="ver.php?id=<?php echo $persona['id']; ?>"><?php echo $persona['nombres']; ?> <?php echo $persona['apellidos']; ?></a></td>
+                                    <td class="text-center align-middle"> <a class="text-decoration-none text-dark" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><?php echo $persona['identidad']; ?></td>
+                                    <td class="text-center align-middle"> <a class="text-decoration-none text-dark" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><?php echo $persona['nombres']; ?> <?php echo $persona['apellidos']; ?></a></td>
                                     <td class="text-center align-middle"><?php echo $persona['direccion']; ?></td>
                                     <td class="text-center align-middle"><?php echo $persona['telefono']; ?></td>
                                     <td class="text-center align-middle" style="color:limegreen;">Entregado</td>
@@ -175,7 +175,7 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                             <input type="hidden" name="txtDireccion" value="<?php echo $persona['direccion']; ?>">
                                             <input type="hidden" name="txtTelefono" value="<?php echo $persona['telefono']; ?>">
 
-                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="hotel.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>                                            
+                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>                                            
                                             <button style="font-size: 13px;" class="btn btn-success m-1" value="btnEstado" title="Quitar entregado" type="submit" name="accion"><i class="fas fa-check-circle"></i></i></button>
 
                                         </form>
@@ -184,8 +184,8 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             <?php } else { ?>
                                 <tr>
                                     <td class="text-center align-middle"><?php echo $c; ?></td>
-                                    <td class="text-center align-middle"> <a class="text-decoration-none text-dark" title="Ver información" href="ver.php?id=<?php echo $persona['id']; ?>"> <?php echo $persona['identidad']; ?></td>
-                                    <td class="text-center align-middle" style="width: 20%;"> <a class="text-decoration-none text-dark" title="Ver información" href="ver.php?id=<?php echo $persona['id']; ?>"><?php echo $persona['nombres']; ?> <?php echo $persona['apellidos']; ?></a></td>
+                                    <td class="text-center align-middle"> <a class="text-decoration-none text-dark" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"> <?php echo $persona['identidad']; ?></td>
+                                    <td class="text-center align-middle" style="width: 20%;"> <a class="text-decoration-none text-dark" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><?php echo $persona['nombres']; ?> <?php echo $persona['apellidos']; ?></a></td>
                                     <td class="text-center align-middle"><?php echo $persona['direccion']; ?></td>
                                     <td class="text-center align-middle"><?php echo $persona['telefono']; ?></td>
                                     <td class="text-center align-middle" style="color: red;">No Entregado</td>
@@ -197,7 +197,7 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                             <input type="hidden" name="txtDireccion" value="<?php echo $persona['direccion']; ?>">
                                             <input type="hidden" name="txtTelefono" value="<?php echo $persona['telefono']; ?>">
 
-                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="hotel.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>                            
+                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>                            
                                             <button style="font-size: 13px;" class="btn btn-danger m-1" value="btnEstado" title="Establecer entregado" type="submit" name="accion"><i class="fas fa-times-circle"></i></i></button>
                                             
                                         </form>
