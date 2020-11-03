@@ -126,14 +126,14 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     <div>
         <main>
-            <div class="container mt-1 pt-3 px-2">
+            <div class="container container-index mt-1 pt-3 px-2">
 
                 <h3 class="text-center mt-4 mb-3">Registro y control de bolsas solidarias</h3>
 
 
 
                 <div class="row ">
-                    <a class="btn btn-success ml-2" href="agregar.php"><i class="fas fa-plus"></i> Agregar</a>
+                    <a class="btn btn-success ml-2" href="agregar.php"><i class="fas fa-plus"></i> Agregar registro</a>
                     <div class="row align-items-center ml-auto mr-2" style="display: flex; justify-content: flex-end;">
                         <input data-table="order-table" id="buscar" class="form-control form-control-sm mr-1 w-75 light-table-filter" type="text" placeholder="Buscar" aria-label="Search">
                         <button id="btnBuscar" class="btn"><i class="fas fa-search" aria-hidden="true"></i></button>
