@@ -61,3 +61,6 @@ input {
     font-size: 1.2rem;
   }
 }
+#layoutSidenav_content{
+    margin-top: 5%;
+}

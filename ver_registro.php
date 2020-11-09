@@ -78,7 +78,7 @@ if ($eliminar) {
     </nav>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container mt-4 pt-3 pb-2 mb-4 px-3" style="-webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+            <div class="container mt-4 pt-3 p-4 pb-2 mb-4 px-3" style="-webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
            box-shadow: 0 0 5px 2px rgba(0, 0, 0, .2);">
 
                 <!-- Nombre y Fecha de Registro -->

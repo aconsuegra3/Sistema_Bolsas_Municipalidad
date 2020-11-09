@@ -108,7 +108,7 @@ switch ($accion) {
 
                 <form class="form-group" action="" method="post" enctype="multipart/form-data">
 
-                    <h3 class="mt-4 mb-4 text-center">Actualizar información de <?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></h3>
+                    <h3 class="mt-4 mb-4 text-center text-uppercase">Actualizar información de <?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></h3>
                     <!-- <h4 class="mt-4 mb-4">Información general</h4> -->
 
                     <div class="row mt-4">
@@ -172,7 +172,7 @@ switch ($accion) {
 
                     <div class="text-center mt-3">
                         <button class="btn btn-success" value="btnModificar" type="submit" name="accion">Guardar cambios</button>
-                        <a href="index.php" class="btn btn-danger" value="btnCancelar" type="submit" name="accion">Cancelar</a><br>
+                        <a href="ver_registro.php?id=<?php echo $persona['id']; ?>" class="btn btn-danger" value="btnCancelar" type="submit" name="accion">Cancelar</a><br>
                     </div>
                 </form>
             </div>

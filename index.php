@@ -128,7 +128,7 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         <main>
             <div class="container container-index mt-1 pt-3 px-2">
 
-                <h3 class="text-center mt-4 mb-3">Registro y control de bolsas solidarias</h3>
+                <h3 class="text-center mt-4 mb-3">REGISTRO Y CONTROL DE BOLSAS SOLIDARIAS</h3>
 
 
 
@@ -144,7 +144,7 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="row mt-3 ">
                     <table class="table order-table">
-                        <thead class="thead-dark">
+                        <thead class="thead bg-#012a36" style="background-color: #012a36; color:white;">
                             <tr>
                                 <th class="text-center">No.</th>
                                 <th style="width: 15%;" class="text-center">N. Identidad</th>
@@ -212,7 +212,7 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
         </main>
-        <footer class="py-4 bg-light mt-auto" style="position: absolute;bottom: 0;width: 100%;">
+        <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-center small">
                     <div class="text-muted text-center">Copyright &copy; Abel Consuegra 2020</div>

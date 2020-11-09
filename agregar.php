@@ -19,24 +19,36 @@ include("conexion/conexion.php");
 // Verificar qué botón presionó el usuario
 switch ($accion) {
     case "btnAgregar":
-        // Creando la sentencia SQL para insertar los valores en la BD
-        // Utilizo pdo para preparar la sentencia
-        $sentencia = $pdo->prepare("INSERT INTO persona(identidad, nombres, apellidos, direccion, telefono, correo, entregado)
-         values (:identidad, :nombres, :apellidos, :direccion, :telefono, :correo, 0)");        
-        // bindParam será para asignar los valores referenciados anteriormente
-        $sentencia->bindParam(':identidad', $txtIdentidad);
-        $sentencia->bindParam(':nombres', $txtNombres);
-        $sentencia->bindParam(':apellidos', $txtApellidos);
-        $sentencia->bindParam(':direccion', $txtDireccion);
-        $sentencia->bindParam(':telefono', $txtTelefono);
-        $sentencia->bindParam(':correo', $txtCorreo);               
 
-        // Ejecutar la instrucción de la sentencia
-        $sentencia->execute();
+        $consultaPersona = $pdo->prepare("SELECT * FROM persona WHERE identidad=:identidad");
+        $consultaPersona->bindParam(':identidad', $txtIdentidad);
+        $consultaPersona->execute();
 
-        if ($sentencia) {
-            echo '<script language="javascript">alert("Registro agregado exitosamente");window.location.href="index.php"</script>';
+        // $persona = $consultaPersona->fetch(PDO::FETCH_ASSOC);
+
+        if ($consultaPersona) {
+            echo '<script language="javascript">alert("Ya hay una persona con ese número de identidad");window.location.href="#"</script>';
+        } else {
+            // Creando la sentencia SQL para insertar los valores en la BD
+            // Utilizo pdo para preparar la sentencia
+            $sentencia = $pdo->prepare("INSERT INTO persona(identidad, nombres, apellidos, direccion, telefono, correo, entregado)
+        values (:identidad, :nombres, :apellidos, :direccion, :telefono, :correo, 0)");
+            // bindParam será para asignar los valores referenciados anteriormente
+            $sentencia->bindParam(':identidad', $txtIdentidad);
+            $sentencia->bindParam(':nombres', $txtNombres);
+            $sentencia->bindParam(':apellidos', $txtApellidos);
+            $sentencia->bindParam(':direccion', $txtDireccion);
+            $sentencia->bindParam(':telefono', $txtTelefono);
+            $sentencia->bindParam(':correo', $txtCorreo);
+
+            // Ejecutar la instrucción de la sentencia
+            $sentencia->execute();
+
+            if ($sentencia) {
+                echo '<script language="javascript">alert("Registro agregado exitosamente");window.location.href="index.php"</script>';
+            }
         }
+
         // // Header sirve para redireccionar a la direccion que se desee
         // header('location: alojamiento.php');
 
@@ -99,7 +111,7 @@ switch ($accion) {
 
                 <form class="form-group" action="" method="post" enctype="multipart/form-data">
 
-                    <h3 class="mt-4 mb-4 text-center">INGRESO DE INFORMACIÓN DE PERSONAS</h3>
+                    <h3 class="mt-4 mb-4 text-center">INGRESO DE NUEVO REGISTRO</h3>
                     <!-- <h4 class="mt-4 mb-4">Información general</h4> -->
 
                     <div class="row mt-4">
@@ -136,7 +148,7 @@ switch ($accion) {
 
 
                     </div>
-                    
+
 
                     <div class="row">
                         <div class="col-lg-4">
@@ -145,7 +157,7 @@ switch ($accion) {
                         </div>
                         <div class="col-lg-8">
                             <label for="">Observaciones: </label>
-                            <input class="form-control" maxlength="255" type="text" name="txtObservaciones" value="" placeholder="" id="txtObservaciones" require="" >
+                            <input class="form-control" maxlength="255" type="text" name="txtObservaciones" value="" placeholder="" id="txtObservaciones" require="">
                             <br>
                         </div>
 
@@ -154,7 +166,7 @@ switch ($accion) {
 
                     <br>
 
-                    
+
                     <div class="text-center mt-3">
                         <button class="btn btn-success" value="btnAgregar" type="submit" name="accion">Agregar</button>
                         <a href="index.php" class="btn btn-danger" value="btnCancelar" type="submit" name="accion">Cancelar</a><br>
@@ -175,7 +187,7 @@ switch ($accion) {
     </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 
 </body>
