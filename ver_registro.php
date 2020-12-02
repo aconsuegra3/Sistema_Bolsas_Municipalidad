@@ -3,17 +3,19 @@
 // Crear la conexion con la base de datos
 include("conexion/conexion.php");
 
-$id = $_GET['id'] ?? '';
+// Capturamos el id con el método get que proviene desde la url
+$id = (isset($_GET['id'])) ? $_GET['id'] : "";
+
 $consultaPersona = $pdo->prepare("SELECT * FROM persona WHERE id=:id");
 $consultaPersona->bindParam(':id', $id);
 $consultaPersona->execute();
 
 $persona = $consultaPersona->fetch(PDO::FETCH_ASSOC);
 
+// Capturamos si se ha pulsado el botón de eliminar mediante parámetro get
+$eliminar = (isset($_GET['del'])) ? $_GET['del'] : "";
 
-
-$eliminar = $_GET['del'] ?? '';
-
+// Si se presionó eliminar, caputará el id del elemento que se seleccionó para eliminar
 if ($eliminar) {
     $id = $_GET['del'];
     // Creando la sentencia SQL para eliminar los valores en la BD
@@ -38,19 +40,15 @@ if ($eliminar) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Sistema para registrar los lugares turisticos de Siguatepeque" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />    
     <meta name="author" content="Abel Consuegra" />
     <title><?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <!-- <link rel="icon" href="../img/logo_muni.png"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">    
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-    <script src="https://kit.fontawesome.com/a018cd853a.js" crossorigin="anonymous"></script>
-    <!-- <link href="../css/styles.css" rel="stylesheet" -->
+    <script src="https://kit.fontawesome.com/a018cd853a.js" crossorigin="anonymous"></script>    
     <link href="css/estilos.css" rel="stylesheet" />
     <link rel="icon" href="img/logo_muni.png">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -59,11 +57,7 @@ if ($eliminar) {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark  px-2">
-
-        <!-- <a class="ml-2" href="index.php"></a> -->
-        <a href="index.php"> <img class="ml-2" src="img/logo_muni.png" width="50px" alt=""></a>
-
-        <!-- <a class="m-auto" href="index.php"><img src="img/logo_muni.png" width="40px" alt=""></a> -->
+        <a href="index.php"> <img class="ml-2" src="img/logo_muni.png" width="50px" alt=""></a>        
         <p class="text-light mt-3 ml-2">Municipalidad de Siguatepeque</p>
         <div class="fecha mr-1 ml-auto text-light">
             <script type="text/javascript">
@@ -124,9 +118,7 @@ if ($eliminar) {
                 </div>
 
                 <div class="text-center my-3">
-                    <a class="btn btn-primary" href="actualizar.php?id=<?php echo $persona['id']; ?>">Modificar</a>
-                    <!-- <button class="btn btn-primary" value="btnModificar" type="submit" name="accion">Modificar</button> -->
-                    <!-- <a href='#' title="Eliminar permanentemente" class="btn btn-danger" onclick="preguntar(<?php echo $hotel['id'] ?>)">Eliminar</a> -->
+                    <a class="btn btn-primary" href="actualizar.php?id=<?php echo $persona['id']; ?>">Modificar</a>                                        
                     <a class="btn btn-danger" href="index.php">Cancelar</a>
                 </div>
             </div>

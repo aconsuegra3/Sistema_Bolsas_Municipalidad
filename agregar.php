@@ -49,9 +49,6 @@ switch ($accion) {
             }
         }
 
-        // // Header sirve para redireccionar a la direccion que se desee
-        // header('location: alojamiento.php');
-
         break;
     case "btnCancelar":
         break;
@@ -72,8 +69,6 @@ switch ($accion) {
     <title>Agregar nuevo registro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- <link rel="icon" href="../img/logo_muni.png"> -->
-
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
@@ -87,11 +82,7 @@ switch ($accion) {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark  px-2">
-
-        <!-- <a class="ml-2" href="index.php"></a> -->
         <a href="index.php"> <img class="ml-2" src="img/logo_muni.png" width="50px" alt=""></a>
-
-        <!-- <a class="m-auto" href="index.php"><img src="img/logo_muni.png" width="40px" alt=""></a> -->
         <p class="text-light mt-3 ml-2">Municipalidad de Siguatepeque</p>
         <div class="fecha mr-1 ml-auto text-light">
             <script type="text/javascript">
@@ -111,9 +102,7 @@ switch ($accion) {
 
                 <form class="form-group" action="" method="post" enctype="multipart/form-data">
 
-                    <h3 class="mt-4 mb-4 text-center">INGRESO DE NUEVO REGISTRO</h3>
-                    <!-- <h4 class="mt-4 mb-4">Información general</h4> -->
-
+                    <h3 class="mt-4 mb-4 text-center">INGRESO DE NUEVO REGISTRO</h3>  
                     <div class="row mt-4">
                         <div class="col-lg-4">
                             <label for="">Identidad: </label>
@@ -130,8 +119,6 @@ switch ($accion) {
                             <input class="form-control " maxlength="255" type="text" name="txtApellidos" value="" placeholder="" id="txtApellidos" require="" required>
                         </div>
                         <br>
-
-
                     </div>
                     <br>
                     <div class="row">
@@ -145,11 +132,7 @@ switch ($accion) {
                             <input class="form-control" maxlength="15" type="text" name="txtTelefono" value="" placeholder="" id="txtTelefono" require="" required>
                             <br>
                         </div>
-
-
                     </div>
-
-
                     <div class="row">
                         <div class="col-lg-4">
                             <label for="">Correo electrónico: </label>
@@ -160,13 +143,8 @@ switch ($accion) {
                             <input class="form-control" maxlength="255" type="text" name="txtObservaciones" value="" placeholder="" id="txtObservaciones" require="">
                             <br>
                         </div>
-
-
                     </div>
-
                     <br>
-
-
                     <div class="text-center mt-3">
                         <button class="btn btn-success" value="btnAgregar" type="submit" name="accion">Agregar</button>
                         <a href="index.php" class="btn btn-danger" value="btnCancelar" type="submit" name="accion">Cancelar</a><br>
@@ -191,5 +169,4 @@ switch ($accion) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 
 </body>
-
 </html>

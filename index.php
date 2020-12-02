@@ -1,5 +1,10 @@
 <?php
+// Por la paginación, detectará si el sitio trae un parámetro get relacionado con la página, de lo contrario lo redirige a la página 1
+if (!$_GET) {
+    header('location: index.php?pagina=1');
+}
 
+// Defino los campos html a utilizar en la programación
 $txtId = (isset($_POST['txtId'])) ? $_POST['txtId'] : "";
 $txtIdentidad = (isset($_POST['txtIdentidad'])) ? $_POST['txtIdentidad'] : "";
 $txtNombres = (isset($_POST['txtNombres'])) ? $_POST['txtNombres'] : "";
@@ -13,6 +18,23 @@ $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 include("conexion/conexion.php");
 // Variable contador para mostrar el número en la tabla html y siempre sea exacto (sin saltos al eliminar algún campo de la BD)
 $c = 0;
+
+// Sentencia de consulta para seleccionar los hoteles
+$sentencia = $pdo->prepare("SELECT * FROM persona");
+// Ejecuta la sentencia
+$sentencia->execute();
+// Almacena la información en la lista de hoteles. Fetch_Assoc es la que devuelve la información de la BD
+$listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Para hacer la paginación se necesita calcular cuantos registros por página
+$registros_por_pagina = 10;
+
+// Contar las filas de la base de datos
+$total_registros = $sentencia->rowCount();
+$paginas = $total_registros / $registros_por_pagina;
+// Ceil sirve para convertir un float en un entero 
+$paginas = ceil($paginas);
 
 switch ($accion) {
     case "btnEstado":
@@ -49,7 +71,8 @@ switch ($accion) {
         break;
 }
 
-$eliminar = $_GET['del'] ?? '';
+// $eliminar = $_GET['del'] ?? '';
+$eliminar = (isset($_GET['del'])) ? $_GET['del'] : "";
 
 if ($eliminar) {
     $id = $_GET['del'];
@@ -63,21 +86,12 @@ if ($eliminar) {
     // Ejecutar la instrucción de la sentencia
     $sentencia->execute();
 
+    // Si la sentencia se ejecutó con éxito mostrará un mensaje y redirigirá a la página de inicio
     if ($sentencia) {
         echo '<script language="javascript">alert("Registro eliminado correctamente");window.location.href="index.php"</script>';
-    }
-    // header("alojamiento.php");
+    }    
 } else {
 }
-
-
-// Sentencia de consulta para seleccionar los hoteles
-$sentencia = $pdo->prepare("SELECT * FROM persona");
-// Ejecuta la sentencia
-$sentencia->execute();
-// Almacena la información en la lista de hoteles. Fetch_Assoc es la que devuelve la información de la BD
-$listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-
 
 ?>
 
@@ -88,7 +102,6 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Sistema para registrar los lugares turisticos de Siguatepeque" />
     <meta name="author" content="Abel Consuegra" />
     <title>Bolsas Solidarias</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -97,7 +110,6 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <script src="https://kit.fontawesome.com/a018cd853a.js" crossorigin="anonymous"></script>
-    <link href="css/styles.css" rel="stylesheet" />
     <link href="css/estilos.css" rel="stylesheet" />
     <link rel="icon" href="img/logo_muni.png">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -106,11 +118,9 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark  px-2">
-
-        <!-- <a class="ml-2" href="index.php"></a> -->
+        
         <a href="index.php"> <img class="ml-2" src="img/logo_muni.png" width="50px" alt=""></a>
-
-        <!-- <a class="m-auto" href="index.php"><img src="img/logo_muni.png" width="40px" alt=""></a> -->
+        
         <p class="text-light mt-3 ml-2">Municipalidad de Siguatepeque</p>
         <div class="fecha mr-1 ml-auto text-light">
             <script type="text/javascript">
@@ -120,17 +130,12 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " del " + f.getFullYear());
             </script>
         </div>
-
-
     </nav>
-
     <div>
         <main>
             <div class="container container-index mt-1 pt-3 px-2">
 
                 <h3 class="text-center mt-4 mb-3">REGISTRO Y CONTROL DE BOLSAS SOLIDARIAS</h3>
-
-
 
                 <div class="row ">
                     <a class="btn btn-success ml-2" href="agregar.php"><i class="fas fa-plus"></i> Agregar registro</a>
@@ -140,7 +145,6 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                 </div>
-
 
                 <div class="row mt-3 ">
                     <table class="table order-table">
@@ -155,8 +159,31 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                 <th style="width: 20%;" class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <?php foreach ($listaPersonas as $persona) { ?>
-                            <?php
+
+                        <?php
+                        if (!$_GET) {
+                            header('location: index.php?pagina=1');
+                        }
+                        if ($_GET['pagina'] > $registros_por_pagina) {
+                            header('location: index.php?pagina=1');
+                        }
+
+                        // Calculamos el registro con el que iniciará a mostrarse la página
+                        $iniciar = ($_GET['pagina'] - 1) * $registros_por_pagina;
+
+                        // Hacemos la consulta de la información de la persona con el límite a calcular desde el registro de inicio y la cantidad de registros a consultar
+                        $sentencia_person = $pdo->prepare("SELECT * FROM persona LIMIT :iniciar,:nregistros");
+
+                        $sentencia_person->bindParam(':iniciar', $iniciar, PDO::PARAM_INT);
+                        $sentencia_person->bindParam(':nregistros', $registros_por_pagina, PDO::PARAM_INT);
+                        // Ejecuta la sentencia
+                        $sentencia_person->execute();
+                        // Almacena la información en la variable inventario. Fetch_Assoc es la que devuelve la información de la BD
+                        $lista_personas_paginado = $sentencia_person->fetchAll(PDO::FETCH_ASSOC);
+                        ?>
+
+                        <?php foreach ($lista_personas_paginado as $persona) { 
+                            // Mostraremos en la tabla la información de los registros de la base de datos en un rango de 10 por página
                             $c = $c + 1;
                             if ($persona['entregado']) { ?>
                                 <tr>
@@ -175,7 +202,7 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                             <input type="hidden" name="txtDireccion" value="<?php echo $persona['direccion']; ?>">
                                             <input type="hidden" name="txtTelefono" value="<?php echo $persona['telefono']; ?>">
 
-                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>                                            
+                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>
                                             <button style="font-size: 13px;" class="btn btn-success m-1" value="btnEstado" title="Quitar entregado" type="submit" name="accion"><i class="fas fa-check-circle"></i></i></button>
 
                                         </form>
@@ -197,9 +224,9 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                             <input type="hidden" name="txtDireccion" value="<?php echo $persona['direccion']; ?>">
                                             <input type="hidden" name="txtTelefono" value="<?php echo $persona['telefono']; ?>">
 
-                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>                            
+                                            <a style="font-size: 13px;" class="btn btn-primary text-center m-1" title="Ver información" href="ver_registro.php?id=<?php echo $persona['id']; ?>"><i class="fas fa-eye"></i></a>
                                             <button style="font-size: 13px;" class="btn btn-danger m-1" value="btnEstado" title="Establecer entregado" type="submit" name="accion"><i class="fas fa-times-circle"></i></i></button>
-                                            
+
                                         </form>
                                     </td>
                                 </tr>
@@ -208,23 +235,40 @@ $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                         <?php } ?>
                     </table>
                 </div>
+                <div class="mt-3" style="display: flex; justify-content:center;">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item <?php echo $_GET['pagina'] <= 1 ? 'disabled' : ''; ?> "><a class="page-link" href="<?php echo 'index.php?pagina=' . $_GET['pagina'] - 1; ?>">Anterior</a></li>
+
+                            <?php for ($i = 0; $i < $paginas; $i++) : ?>
+
+                                <li class="page-item <?php echo $_GET['pagina'] == $i + 1 ? 'active' : ''; ?>"><a class="page-link" href="index.php?pagina=<?php echo $i + 1; ?>">
+                                        <?php echo $i + 1; ?>
+                                    </a></li>
+
+
+                            <?php endfor ?>
+
+                            <li class="page-item <?php echo $_GET['pagina'] >= $paginas ? 'disabled' : ''; ?>" "><a class=" page-link" href="<?php echo 'index.php?pagina=' . $_GET['pagina'] + 1; ?>">Siguiente</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
 
         </main>
-        <footer class="py-4 bg-light mt-auto">
+        <!-- <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-center small">
                     <div class="text-muted text-center">Copyright &copy; Abel Consuegra 2020</div>
 
                 </div>
             </div>
-        </footer>
+        </footer> -->
     </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
     <script src="js/eliminar.js" type="text/javascript"></script>
     <script src="js/buscar.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

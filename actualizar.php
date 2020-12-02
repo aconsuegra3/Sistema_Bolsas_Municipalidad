@@ -3,7 +3,9 @@
 // Crear la conexion con la base de datos
 include("conexion/conexion.php");
 
-$id = $_GET['id'] ?? '';
+// $id = $_GET['id'] ?? '';
+$id = (isset($_GET['id'])) ? $_GET['id'] : "";
+
 $consultaPersona = $pdo->prepare("SELECT * FROM persona WHERE id=:id");
 $consultaPersona->bindParam(':id', $id);
 $consultaPersona->execute();
@@ -21,15 +23,12 @@ $txtTelefono = (isset($_POST['txtTelefono'])) ? $_POST['txtTelefono'] : "";
 $txtCorreo = (isset($_POST['txtCorreo'])) ? $_POST['txtCorreo'] : "";
 $txtObservaciones = (isset($_POST['txtObservaciones'])) ? $_POST['txtObservaciones'] : "";
 
-
-
 // Detecta la acción del botón a clickear
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 
 // Verificar qué botón presionó el usuario
 switch ($accion) {
     case "btnModificar":
-        // $fechaActual = date('d-m-Y');
         $sentencia = $pdo->prepare("UPDATE persona SET identidad=:identidad, nombres=:nombres, apellidos=:apellidos, direccion=:direccion, telefono=:telefono, correo=:correo WHERE id=:id");
 
         $sentencia->bindParam(':identidad', $txtIdentidad);
@@ -47,8 +46,6 @@ switch ($accion) {
         if ($sentencia) {
             echo '<script language="javascript">alert("Registro actualizado correctamente");window.location.href="index.php"</script>';
         }
-
-        // header('location: alojamiento.php');
         break;
     case "btnCancelar":
         header('location: alojamiento.php');
@@ -109,8 +106,6 @@ switch ($accion) {
                 <form class="form-group" action="" method="post" enctype="multipart/form-data">
 
                     <h3 class="mt-4 mb-4 text-center text-uppercase">Actualizar información de <?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></h3>
-                    <!-- <h4 class="mt-4 mb-4">Información general</h4> -->
-
                     <div class="row mt-4">
                         <div class="col-lg-4">
                             <label for="">Identidad: </label>
