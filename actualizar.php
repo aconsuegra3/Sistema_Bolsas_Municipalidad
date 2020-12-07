@@ -29,7 +29,7 @@ $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 // Verificar qué botón presionó el usuario
 switch ($accion) {
     case "btnModificar":
-        $sentencia = $pdo->prepare("UPDATE persona SET identidad=:identidad, nombres=:nombres, apellidos=:apellidos, direccion=:direccion, telefono=:telefono, correo=:correo WHERE id=:id");
+        $sentencia = $pdo->prepare("UPDATE persona SET identidad=:identidad, nombres=:nombres, apellidos=:apellidos, direccion=:direccion, telefono=:telefono, correo=:correo, observaciones=:observaciones WHERE id=:id");
 
         $sentencia->bindParam(':identidad', $txtIdentidad);
         $sentencia->bindParam(':nombres', $txtNombres);
@@ -37,6 +37,7 @@ switch ($accion) {
         $sentencia->bindParam(':direccion', $txtDireccion);
         $sentencia->bindParam(':telefono', $txtTelefono);
         $sentencia->bindParam(':correo', $txtCorreo);    
+        $sentencia->bindParam(':observaciones', $txtObservaciones);
 
         $sentencia->bindParam(':id', $id);
         // Ejecutar la instrucción de la sentencia
@@ -47,8 +48,7 @@ switch ($accion) {
             echo '<script language="javascript">alert("Registro actualizado correctamente");window.location.href="index.php"</script>';
         }
         break;
-    case "btnCancelar":
-        header('location: alojamiento.php');
+    case "btnCancelar":        
         break;
 }
 

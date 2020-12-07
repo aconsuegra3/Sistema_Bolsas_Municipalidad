@@ -31,8 +31,8 @@ switch ($accion) {
         } else {
             // Creando la sentencia SQL para insertar los valores en la BD
             // Utilizo pdo para preparar la sentencia
-            $sentencia = $pdo->prepare("INSERT INTO persona(identidad, nombres, apellidos, direccion, telefono, correo, entregado)
-        values (:identidad, :nombres, :apellidos, :direccion, :telefono, :correo, 0)");
+            $sentencia = $pdo->prepare("INSERT INTO persona(identidad, nombres, apellidos, direccion, telefono, correo, entregado, observaciones)
+        values (:identidad, :nombres, :apellidos, :direccion, :telefono, :correo, 0, :observaciones)");
             // bindParam será para asignar los valores referenciados anteriormente
             $sentencia->bindParam(':identidad', $txtIdentidad);
             $sentencia->bindParam(':nombres', $txtNombres);
@@ -40,6 +40,7 @@ switch ($accion) {
             $sentencia->bindParam(':direccion', $txtDireccion);
             $sentencia->bindParam(':telefono', $txtTelefono);
             $sentencia->bindParam(':correo', $txtCorreo);
+            $sentencia->bindParam(':observaciones', $txtObservaciones);
 
             // Ejecutar la instrucción de la sentencia
             $sentencia->execute();

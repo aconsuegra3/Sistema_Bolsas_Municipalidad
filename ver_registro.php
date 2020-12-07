@@ -40,15 +40,15 @@ if ($eliminar) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="author" content="Abel Consuegra" />
     <title><?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-    <script src="https://kit.fontawesome.com/a018cd853a.js" crossorigin="anonymous"></script>    
+    <script src="https://kit.fontawesome.com/a018cd853a.js" crossorigin="anonymous"></script>
     <link href="css/estilos.css" rel="stylesheet" />
     <link rel="icon" href="img/logo_muni.png">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -57,7 +57,7 @@ if ($eliminar) {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark  px-2">
-        <a href="index.php"> <img class="ml-2" src="img/logo_muni.png" width="50px" alt=""></a>        
+        <a href="index.php"> <img class="ml-2" src="img/logo_muni.png" width="50px" alt=""></a>
         <p class="text-light mt-3 ml-2">Municipalidad de Siguatepeque</p>
         <div class="fecha mr-1 ml-auto text-light">
             <script type="text/javascript">
@@ -72,7 +72,7 @@ if ($eliminar) {
     </nav>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container mt-4 pt-3 p-4 pb-2 mb-4 px-3" style="-webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+            <div class="container mt-2 pt-1s p-4 pb-2 mb-4 px-3" style="-webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
            box-shadow: 0 0 5px 2px rgba(0, 0, 0, .2);">
 
                 <!-- Nombre y Fecha de Registro -->
@@ -81,7 +81,7 @@ if ($eliminar) {
                         <h2><?php echo $persona['nombres'] ?> <?php echo $persona['apellidos'] ?></h2>
                     </div>
                     <div class="ml-2 row align-items-center col-lg-2">
-                    <a href='#' title="Eliminar permanentemente" class="btn btn-danger" onclick="preguntar(<?php echo $persona['id'] ?>)">Eliminar</a>
+                        <a href='#' title="Eliminar permanentemente" class="btn btn-danger" onclick="preguntar(<?php echo $persona['id'] ?>)">Eliminar</a>
                     </div>
                 </div>
                 <!-- Linea horizontal -->
@@ -116,9 +116,15 @@ if ($eliminar) {
                         <p class="ml-2 mb-2" style="color: red;">No Entregado</p>
                     <?php } ?>
                 </div>
+                <?php if ($persona['observaciones']) { ?>
+                    <div class="ml-3 mt-4 pt-1 row align-items-center col-lg-12">
+                        <h6>Observaciones: </h6>
+                        <p class="ml-2 mb-2"> <?php echo $persona['observaciones'] ?></p>                   
+                    </div>
+                <?php } ?>
 
-                <div class="text-center my-3">
-                    <a class="btn btn-primary" href="actualizar.php?id=<?php echo $persona['id']; ?>">Modificar</a>                                        
+                <div class="text-center my-3 mb-1">
+                    <a class="btn btn-primary" href="actualizar.php?id=<?php echo $persona['id']; ?>">Modificar</a>
                     <a class="btn btn-danger" href="index.php">Cancelar</a>
                 </div>
             </div>
