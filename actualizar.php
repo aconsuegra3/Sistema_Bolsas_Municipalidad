@@ -155,7 +155,7 @@ switch ($accion) {
                         </div>
                         <div class="col-lg-8">
                             <label for="">Observaciones: </label>
-                            <input class="form-control" maxlength="255" type="text" name="txtObservaciones" value="" placeholder="" id="txtObservaciones" require="">
+                            <input class="form-control" maxlength="255" type="text" name="txtObservaciones" value="<?php echo $persona['observaciones'] ?>" placeholder="" id="txtObservaciones" require="">
                             <br>
                         </div>
 

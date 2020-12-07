@@ -26,7 +26,8 @@ switch ($accion) {
 
         // $persona = $consultaPersona->fetch(PDO::FETCH_ASSOC);
 
-        if ($consultaPersona) {
+        $cuentaIdentidad = $consultaPersona->rowCount();
+        if ($cuentaIdentidad >= 1) {
             echo '<script language="javascript">alert("Ya hay una persona con ese número de identidad");window.location.href="#"</script>';
         } else {
             // Creando la sentencia SQL para insertar los valores en la BD
