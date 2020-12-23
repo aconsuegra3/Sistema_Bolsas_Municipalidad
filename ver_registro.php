@@ -67,8 +67,7 @@ if ($eliminar) {
                 document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " del " + f.getFullYear());
             </script>
         </div>
-
-
+        <a class="fecha ml-2" style="text-decoration: none;" href="manual_de_usuario.pdf" target="_blank"><i class="fas fa-question-circle"></i> Ayuda</a>
     </nav>
     <div id="layoutSidenav_content">
         <main>
